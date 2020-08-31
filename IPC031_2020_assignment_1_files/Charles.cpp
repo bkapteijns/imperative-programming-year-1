@@ -158,8 +158,10 @@ void find_ball ()
 // give one or more comment lines about what will happen in this function
 void clean_string_with_balls ()
 {
+    // take ball and step until all the balls are gone
     while (on_ball())
     {
+        // picks up the current ball
         get_ball();
 
         // in front of wall => turn right and walk
@@ -173,8 +175,9 @@ void clean_string_with_balls ()
         {
             step();
         }
-        turn_right();
     }
+    // Get back to initial rotation
+    turn_right();
 }
 
 // give one or more comment lines about what will happen in this function
