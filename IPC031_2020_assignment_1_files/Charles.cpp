@@ -158,7 +158,23 @@ void find_ball ()
 // give one or more comment lines about what will happen in this function
 void clean_string_with_balls ()
 {
-    // enter your Charles code here
+    while (on_ball())
+    {
+        get_ball();
+
+        // in front of wall => turn right and walk
+        // else => walk
+        if (in_front_of_wall())
+        {
+            turn_right();
+            step();
+        }
+        else
+        {
+            step();
+        }
+        turn_right();
+    }
 }
 
 // give one or more comment lines about what will happen in this function
