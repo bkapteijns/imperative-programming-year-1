@@ -239,7 +239,50 @@ void clean_chaos_with_balls()
 // give one or more comment lines about what will happen in this function
 void around_the_block()
 {
-    // enter your Charles code here
+    // Walk to the ball in the upper hand
+    while (!on_ball())
+    {
+        step();
+    }
+    // Turn right (to walk to the block in the center of the map)
+    turn_right();
+    while (!in_front_of_wall())
+    {
+        step();
+    }
+    // This while loop lets charles fill up walls until he has done all of them
+    while (!on_ball())
+    {
+        // This while loop lets charles fill up one wall (by checking if he is still standing next to a wall)
+        while (in_front_of_wall())
+        {
+            turn_left();
+            put_ball();
+            step();
+            turn_right();
+        }
+        // Put a ball in the corner and advance to the next wall
+        put_ball();
+        step();
+        turn_right();
+    }
+    // Turn charles so he is facing north
+    turn_left();
+    turn_left();
+    // Make charles go to the top of the map
+    while (!in_front_of_wall())
+    {
+        step();
+    }
+    // Make charles go to the top left of the map, so he will have the same position as in the beginning
+    turn_left();
+    while (!in_front_of_wall())
+    {
+        step();
+    }
+    // Turn charles, so he will have the same rotation as in the beginning
+    turn_left();
+    turn_left();
 }
 
 // For testing purposes, you can define your own function here:
