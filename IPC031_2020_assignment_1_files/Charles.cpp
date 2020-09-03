@@ -286,9 +286,41 @@ void around_the_block()
 }
 
 // For testing purposes, you can define your own function here:
-void test()
+void test() // Bonus assignment 1.2
 {
-    // enter your Charles code here
+    /*
+        .OC.OX  <>
+        .OC.OX  <4>
+        .OC.OX  <4,false>
+        .OC.OX  <4>
+        .OC.OX  <5>
+        .OC.OX  <1>
+        .OC.OX  <1,true>
+        .OC.OX  <1>
+        .Oc.OX  <2>
+        .Oc.OX  <5>
+        .O.cOX  <6>
+        .O.cOX  <4>
+        .O.cOX  <4,false>
+        .O.cOX  <4>
+        .O.cOX  <5>
+        .O.cOX  <1>
+        .O.cOX  <1,false>
+        .O.cOX  <1>
+        .O.COX  <3>
+        .O.COX  <5>
+        .O.OCX  <6>
+        .O.OCX  <4>
+        .O.OCX  <4,true>
+        .O.OCX  <4>
+        .O.OCX  <7>
+        .O.OCX  <1>
+        .O.OCX  <1,true>
+        .O.OCX  <1>
+        .O.OcX  <2>
+        .O.OcX  <7>
+        .O.OcX  <>
+     */
 }
 
 // end of part with code to be completed by yourself
