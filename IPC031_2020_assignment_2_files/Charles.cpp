@@ -252,7 +252,8 @@ void art()
 
 // ********** ASSIGNMENT 2 *****************
 
-void walk_ball_line()
+// walk a full line over the balls
+void follow_balls()
 {
     while (!in_front_of_wall() && on_ball())
     {
@@ -260,25 +261,27 @@ void walk_ball_line()
     }
 }
 
+// test whether the line continues left or right
 void check_direction()
 {
+    // walk back to the lines (because charles has walked further) and rotate to the right of the line
     turn_right();
+    turn_right();
+    step();
+    turn_left();
+    // Make sure charles does not crash
     if (!in_front_of_wall())
     {
+        // go to the right of the line
         step();
-        if (on_ball())
+        // go to left of the line if the ball is not there
+        if (!on_ball())
         {
             turn_left();
             turn_left();
             step();
             if (!in_front_of_wall())
             {
-                step();
-            }
-            if (!on_ball)
-            {
-                turn_right();
-                turn_right();
                 step();
             }
         }
@@ -288,14 +291,64 @@ void check_direction()
 // give one or more comment lines about what will happen in this function
 void hansl_and_gretl()
 {
-    // enter your Charles code here
+    // while we are standing on the line, we need to walk over the line (and check where the line continues after a bend)
+    while (on_ball() && !in_front_of_wall())
+    {
+        follow_balls();
+        // check which side you have to go to
+        check_direction();
+    }
+    // When we are at the end of the line, we need to get back to the line and rotate to the east
+    turn_right();
+    turn_right();
+    step();
+    while (!north() && on_ball())
+    {
+        turn_left();
+    }
+    turn_right();
+}
+
+// fill a line with balls
+void walk_until_wall(bool place_balls)
+{
+    // make sure we do not create a gap
+    if (place_balls)
+    {
+        put_ball();
+    }
+    // fill the rest of the line with balls until we see a wall
+    while (!in_front_of_wall())
+    {
+        step();
+        if (place_balls)
+        {
+            put_ball();
+        }
+    }
 }
 
 // give one or more comment lines about what will happen in this function
 // note that you are allowed to add formal parameters to fill_cave_with_balls if that is necessary for your solution
 void fill_cave_with_balls()
 {
-    // enter your Charles code here
+    // go to the second column
+    step();
+    // fill all the columns (except the last one)
+    while (!in_front_of_wall())
+    {
+        turn_right();
+        walk_until_wall(true);
+        turn_right();
+        turn_right();
+        walk_until_wall(false);
+        turn_right();
+        step();
+    }
+    // go to the other side (top or bottom) and rotate west on the bottom and east on the top
+    turn_right();
+    walk_until_wall(false);
+    turn_right();
 }
 
 // give one or more comment lines about what will happen in this function
