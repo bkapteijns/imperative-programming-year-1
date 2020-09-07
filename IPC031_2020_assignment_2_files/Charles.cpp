@@ -359,10 +359,54 @@ void cave()
     fill_cave_with_balls();
 }
 
+void walk_until_ball()
+{
+    while (!on_ball())
+    {
+        step();
+    }
+}
+
+void walk_along_wall()
+{
+    turn_left();
+    step();
+    turn_right();
+    while (!on_ball())
+    {
+        while (in_front_of_wall() && !on_ball())
+        {
+            turn_left();
+            if (!in_front_of_wall())
+            {
+                step();
+                turn_right();
+            }
+        }
+        if (!on_ball())
+        {
+            step();
+            turn_right();
+        }
+    }
+}
+
 // give one or more comment lines about what will happen in this function
 void shamrock()
 {
-    // enter your Charles code here
+    walk_until_ball();
+    turn_right();
+    walk_until_wall(false);
+    put_ball();
+    walk_along_wall();
+    get_ball();
+    turn_right();
+    turn_right();
+    walk_until_wall(false);
+    turn_left();
+    walk_until_wall(false);
+    turn_left();
+    turn_left();
 }
 
 // end of part with code to be completed by yourself
