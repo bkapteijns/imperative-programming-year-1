@@ -367,24 +367,31 @@ void walk_until_ball()
     }
 }
 
-void walk_along_wall()
+void walk_along_shamrock()
 {
+    // go to the next position (so we don't stand on the ball)
     turn_left();
     step();
     turn_right();
+    // walk until the ball (end position)
     while (!on_ball())
     {
+        // check whether we are standing next to the shamrock/along the wall
         while (in_front_of_wall() && !on_ball())
         {
+            // do a step (by turning left, stepping and turning right so we are facing the wall again)
             turn_left();
+            // when we are in a corner, we want to turn left twice (so we won't run into the wall)
             if (!in_front_of_wall())
             {
                 step();
                 turn_right();
             }
         }
+        // don't walk over the ball, when it's placed on a 270 degree corner
         if (!on_ball())
         {
+            // make sure we turn around the shamrock rectangle correctly
             step();
             turn_right();
         }
@@ -394,12 +401,18 @@ void walk_along_wall()
 // give one or more comment lines about what will happen in this function
 void shamrock()
 {
+    // walk to the shamrock
     walk_until_ball();
     turn_right();
+    // declared for the previous exercise
     walk_until_wall(false);
+    // put ball so we know where to stop
     put_ball();
-    walk_along_wall();
+    // walk along the shamrock
+    walk_along_shamrock();
+    // pick up the ball again
     get_ball();
+    // go back to the starting position
     turn_right();
     turn_right();
     walk_until_wall(false);
