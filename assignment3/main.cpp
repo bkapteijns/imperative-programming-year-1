@@ -116,11 +116,13 @@ sqrt(v) = x = 3.316...
 
 void inclusion(double v, double e)
 {
-  int loop_amount = 0;
+  // assign the needed variables
+  int n = 1;
   double a = 0;
   double b = max(1.0, v);
   double x = (a + b) / 2;
 
+  // check if either a or b is the square root of v
   if (a * a == v)
   {
     cout << "Inclusion square root of " << v << " is " << a << " (a)" << endl;
@@ -130,9 +132,10 @@ void inclusion(double v, double e)
     cout << "Inclusion square root of " << v << " is " << b << " (b)" << endl;
   }
 
+  // loop until x is close enough to the square root of v
   while (abs(x * x - v) > e)
   {
-    loop_amount++;
+    // do the algorith
     if (x * x > v)
     {
       b = x;
@@ -142,35 +145,41 @@ void inclusion(double v, double e)
       a = x;
     }
     x = (a + b) / 2;
+    // increase n by one
+    n++;
   }
 
-  cout << "Inclusion square root of " << v << " is " << x << " for epsilon " << e << " (loop amount: " << loop_amount << ")" << endl;
+  cout << "Inclusion square root of " << v << " is " << x << " for epsilon " << e << " (loop amount: " << n << ")" << endl;
 
   return;
 }
 
 void newton_raphson(double v, double e)
 {
-  int loop_amount = 0;
+  // assign the needed vars
+  int n = 1;
   double x = max(1.0, v);
 
+  // loop until the x is close enough to the square root of v
   while (abs(x * x - v) > e)
   {
-    loop_amount++;
+    // do the algorithm
     x = x - (x * x - v) / (2 * x);
+    n++;
   }
 
-  cout << "Newton_raphson square root of " << v << " is " << x << " for epsilon " << e << " (loop amount: " << loop_amount << ")" << endl;
+  cout << "Newton_raphson square root of " << v << " is " << x << " for epsilon " << e << " (loop amount: " << n << ")" << endl;
 
   return;
 }
 
 int main()
 {
-  bool endProgram;
+  // Store the value 'v' and the epsilon
   double value;
   double epsilon;
 
+  // Make sure the program does not quit after only one number
   while (true)
   {
     cout << "First give the number of which you want to compute the square root" << endl;
@@ -178,6 +187,7 @@ int main()
     cin >> value >> epsilon;
     cout << "This is the value: " << value << endl;
     cout << "And this is the epsilon: " << epsilon << endl;
+    // do the inclusion and newton_raphson algorithm
     inclusion(value, epsilon);
     newton_raphson(value, epsilon);
     cout << endl;
