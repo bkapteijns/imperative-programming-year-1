@@ -135,7 +135,7 @@ void inclusion(double v, double e)
   // loop until x is close enough to the square root of v
   while (abs(x * x - v) > e)
   {
-    // do the algorith
+    // do the algorithm
     if (x * x > v)
     {
       b = x;
