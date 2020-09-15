@@ -299,9 +299,13 @@ void hansl_and_gretl()
         check_direction();
     }
     // When we are at the end of the line, we need to get back to the line and rotate to the east
+    // we should have added this if statement
+    //if (!in_front_of_wall())
+    //{
     turn_right();
     turn_right();
     step();
+    //}
     while (!north() && on_ball())
     {
         turn_left();
