@@ -1,9 +1,12 @@
 {
   "ExpandedNodes": [
     "",
+    "\\assignment3",
+    "\\assignment3\\bonus",
+    "\\assignment3\\mandatory",
     "\\IPC031_2020_assignment_1_files",
     "\\IPC031_2020_assignment_2_files"
   ],
-  "SelectedNode": "\\IPC031_2020_assignment_2_files\\Charles.cpp",
+  "SelectedNode": "\\assignment3\\bonus\\main.cpp",
   "PreviewInSolutionExplorer": false
 }
