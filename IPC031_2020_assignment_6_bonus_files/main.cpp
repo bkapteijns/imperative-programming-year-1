@@ -219,6 +219,7 @@ int main()
         next_generation(now_universe, universe);
         show_universe(universe);
         cout << endl;
+        cout << endl;
     }
 
     fill_output_file(outputfile, universe);
