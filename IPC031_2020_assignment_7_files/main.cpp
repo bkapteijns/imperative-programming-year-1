@@ -70,9 +70,12 @@ int wordAmount(string &input)
       input[i] = ' ';
       input.erase(input.begin() + i + 1);
     }
-    if (!isLetter(input[i]) && isLetter(input[i - 1]))
+    if (i >= 1)
     {
-      wordLength++;
+      if (input[i] == ' ')
+      {
+        wordLength++;
+      }
     }
   }
   return wordLength;
@@ -90,10 +93,7 @@ void array_of_query(string searchWords[], int length, string input)
   {
     if (input[i] == ' ')
     {
-      if (!(searchWords[j] == ""))
-      {
-        j++;
-      }
+      j++;
     }
     else
     {
@@ -108,6 +108,7 @@ void read_word(string word)
 { // preconditions:
   assert(true);
   // postconditions: we will have printed the trimmed word
+
   while (!isLetter(word[0]))
   {
     word.erase(word.begin());
@@ -116,13 +117,18 @@ void read_word(string word)
   {
     word.erase(word.end());
   }
-  cout << word << '\t';
+
+  cout << word << ' ';
 }
 
 void filterInput(string input)
 { //preconditions:
   assert(input.length() > 0);
-  //postconditions: we want to
+  //postconditions: we will have printed out the filtered words
+  string random;
+
+  cout << input << endl;
+
   int amount_of_words = wordAmount(input);
   string allWords[amount_of_words];
   for (int i = 0; i < amount_of_words; i++)
@@ -151,6 +157,7 @@ int main()
   while (true)
   {
     cout << "Do you want to open a file? (y / n)" << endl;
+    cin.clear();
     cin.get(c);
     if (c == 'y' || c == 'Y')
     {
