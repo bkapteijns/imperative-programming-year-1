@@ -141,7 +141,6 @@ void filterInput(string input)
 { //preconditions:
   assert(input.length() > 0);
   //postconditions: we will have printed out the filtered words
-  cout << input << endl;
 
   int amount_of_words = wordAmount(input);
   string allWords[amount_of_words];
@@ -149,7 +148,6 @@ void filterInput(string input)
   {
     allWords[i] = "";
   }
-  cout << "Word amount: " << amount_of_words << endl;
   array_of_query(allWords, amount_of_words, input);
   for (int i = 0; i < amount_of_words; i++)
   {
