@@ -107,7 +107,7 @@ void array_of_query(string searchWords[], int length, string input)
 void read_word(string word)
 { // preconditions:
   assert(true);
-  // postconditions: we will have printed the trimmed word
+  // postconditions: we will have printed the trimmed word (so with only letters)
 
   while (!isLetter(word[0]))
   {
