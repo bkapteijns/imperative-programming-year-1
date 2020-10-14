@@ -108,25 +108,35 @@ void read_word(string word)
 { // preconditions:
   assert(true);
   // postconditions: we will have printed the trimmed word (so with only letters)
-
+  if (word.length() == 0)
+  {
+    return;
+  }
   while (!isLetter(word[0]))
   {
     word.erase(word.begin());
+    if (word.length() == 0)
+    {
+      return;
+    }
   }
   while (!isLetter(word[word.length() - 1]))
   {
-    word.erase(word.end());
+    word.erase(word.begin() + word.length() - 1);
+    if (word.length() == 0)
+    {
+      return;
+    }
   }
 
   cout << word << ' ';
+  return;
 }
 
 void filterInput(string input)
 { //preconditions:
   assert(input.length() > 0);
   //postconditions: we will have printed out the filtered words
-  string random;
-
   cout << input << endl;
 
   int amount_of_words = wordAmount(input);
