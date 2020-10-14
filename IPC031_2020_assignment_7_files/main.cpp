@@ -108,7 +108,11 @@ void read_word(string word)
 { // preconditions:
   assert(true);
   // postconditions: we will have printed the trimmed word (so with only letters)
-  if (word.length() == 0)
+  if (word[word.length() - 1] == '\'' && !isLetter(word[word.length() - 2]))
+  {
+    word.erase(word.begin() + word.length() - 1);
+  }
+  if (word.length() == 0 || word == "'")
   {
     return;
   }
