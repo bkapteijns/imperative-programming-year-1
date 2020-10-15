@@ -40,8 +40,9 @@ void inputToString(string &input)
   // preconditions:
   assert(input.length() == 0);
   // postconditions: we will have put the console input into the input variable
+  typedef char TemporaryCharacter;
 
-  char temp;
+  TemporaryCharacter temp;
 
   cout << "Write your own text here (without enters):" << endl;
   cin.get(temp);
@@ -54,7 +55,8 @@ bool isLetter(char letter)
 { // preconditions:
   assert(true);
   // postconditions: we will have determined if the character is a letter
-  int c = static_cast<int>(letter);
+  typedef int Letter;
+  Letter c = static_cast<int>(letter);
   return (c == 39 || c >= 65 && c <= 90 || c >= 97 && c <= 122);
 }
 
@@ -62,8 +64,10 @@ int wordAmount(string &input)
 { // preconditions:
   assert(input.length() > 0);
   // postconditions: we will have computed the amount of words in an input
-  int wordLength = 1;
-  for (int i = 0; i < input.length(); i++)
+  typedef int Length;
+  typedef int Counter;
+  Length wordLength = 1;
+  for (Counter i = 0; i < input.length(); i++)
   {
     if (input[i] == '-' && input[i + 1] == '-')
     {
@@ -89,7 +93,7 @@ void array_of_query(string searchWords[], int length, string input)
 
   Counter j = 0;
 
-  for (int i = 0; i < input.length(); i++)
+  for (Counter i = 0; i < input.length(); i++)
   {
     if (input[i] == ' ')
     {
@@ -141,15 +145,17 @@ void filterInput(string input)
 { //preconditions:
   assert(input.length() > 0);
   //postconditions: we will have printed out the filtered words
-
-  int amount_of_words = wordAmount(input);
-  string allWords[amount_of_words];
-  for (int i = 0; i < amount_of_words; i++)
+  typedef int Amount;
+  typedef string Word;
+  typedef int Counter;
+  Amount amount_of_words = wordAmount(input);
+  Word allWords[amount_of_words];
+  for (Counter i = 0; i < amount_of_words; i++)
   {
     allWords[i] = "";
   }
   array_of_query(allWords, amount_of_words, input);
-  for (int i = 0; i < amount_of_words; i++)
+  for (Counter i = 0; i < amount_of_words; i++)
   {
     read_word(allWords[i]);
   }
