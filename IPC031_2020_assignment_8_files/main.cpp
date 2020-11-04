@@ -319,10 +319,10 @@ int main()
         }
     }
 
-    match_tracks(trackList, "el", true);
-    match_artists(trackList, "el", true);
-    match_cds(trackList, "el", true);
-    number_of_cds(trackList);
+    cout << "Number of tracks with 'el': " << match_tracks(trackList, "el", true) << endl;
+    cout << "Number of artists with 'el: " << match_artists(trackList, "el", true) << endl;
+    cout << "Number of albums from artists with 'el': " << match_cds(trackList, "el", true) << endl;
+    cout << "The total number of cds: " << number_of_cds(trackList);
 
     while (true)
     {
