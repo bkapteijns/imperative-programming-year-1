@@ -316,9 +316,13 @@ int main()
         if (new_track.artist != "")
         {
             trackList.push_back(new_track);
-            cout << ' ' << new_track.artist << ' ' << new_track.cd << ' ' << new_track.year << ' ' << new_track.track << ' ' << new_track.title << ' ' << new_track.time << ' ' << new_track.tags << ' ' << new_track.country;
         }
     }
+
+    match_tracks(trackList, "el", true);
+    match_artists(trackList, "el", true);
+    match_cds(trackList, "el", true);
+    number_of_cds(trackList);
 
     while (true)
     {
