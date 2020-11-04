@@ -1,0 +1,12 @@
+> runningtime blue
+artist: Gary Moore album: Still got the blues
+Running time album: 52:58
+artist: Ghostpoet album: Peanut butter blues & melancholy jam
+Running time album: 41:11
+artist: Joe Satriani album: Flying in a blue dream
+Running time album: 64:25
+artist: Miles Davis album: Kind of blue
+Running time album: 55:16
+artist: Sting album: The dream of the blue turtles
+Running time album: 41:40
+Number of found artists: 5

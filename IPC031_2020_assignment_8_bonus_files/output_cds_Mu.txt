@@ -1,0 +1,18 @@
+> cds Mu
+artist: Dropkick Murphys album (year): Going out in style (2011)
+artist: Dropkick Murphys album (year): Live at Fenway (2011)
+artist: Mullmuzzler album (year): 2 (2001)
+artist: Mullmuzzler album (year): Keep it to yourself (1999)
+artist: Mumford & Sons album (year): Delta (2018)
+artist: Mumford & Sons album (year): Sigh no more (2009)
+artist: Mumford & Sons album (year): Wilder mind [deluxe] (2015)
+artist: Muse album (year): Absolution (2003)
+artist: Muse album (year): Black holes and revelations (2006)
+artist: Muse album (year): Drones (2015)
+artist: Muse album (year): Live at Rome Olympic Stadium (2013)
+artist: Muse album (year): Origin of symmetry (2001)
+artist: Muse album (year): Showbiz (1999)
+artist: Muse album (year): Simulation theory (2018)
+artist: Muse album (year): The 2nd law (2012)
+artist: Muse album (year): The resistance (2009)
+Number of found albums: 16
