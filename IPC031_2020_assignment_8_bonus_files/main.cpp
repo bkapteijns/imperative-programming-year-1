@@ -345,6 +345,8 @@ int main()
         }
     }
 
+    cout << "Available commands: track (query), artist (query), cds (query), #cds, year (query), stop." << endl;
+
     InputText input;
     char c;
     while (true)
