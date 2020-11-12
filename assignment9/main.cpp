@@ -377,6 +377,7 @@ istream &operator>>(istream &in, Track &track)
     getline(in, temp);
 }
 
+/* These are the operators for the mandatory assignment
 bool operator<(Track a, Track b)
 { // preconditions:
     assert(true);
@@ -427,6 +428,120 @@ bool operator==(Track a, Track b)
     {
         return false;
     }
+}
+*/
+
+/*
+// This is the operator for bonus part 1
+bool operator<(Track a, Track b)
+{ // preconditions:
+    assert(true);
+    // postconditions: we will have compared track a to b and given true if a is the smaller one according to the assignment description, false otherwise
+    int a_time = a.time.minutes * 60 + a.time.seconds;
+    int b_time = b.time.minutes * 60 + b.time.seconds;
+    if (a_time < b_time)
+    {
+        return true;
+    }
+    else if (a_time > b_time)
+    {
+        return false;
+    }
+    if (a.artist < b.artist)
+    {
+        return true;
+    }
+    else if (a.artist > b.artist)
+    {
+        return false;
+    }
+    if (a.title < b.title)
+    {
+        return true;
+    }
+    else if (a.title > b.title)
+    {
+        return false;
+    }
+    if (a.cd < b.cd)
+    {
+        return true;
+    }
+    else if (a.cd > b.cd)
+    {
+        return false;
+    }
+    return false;
+}
+bool operator==(Track a, Track b)
+{ // preconditions:
+    assert(true);
+    // postconditions: we will have compared track a to b and given true if a is equal to b according to the assignment description, false otherwise
+    int a_time = a.time.minutes * 60 + a.time.seconds;
+    int b_time = b.time.minutes * 60 + b.time.seconds;
+    if (a_time == b_time && a.artist == b.artist && a.title == b.title && a.cd == b.cd)
+    {
+        return true;
+    }
+    return false;
+}
+*/
+
+string toLower(string text)
+{
+    string lower = "";
+    for (int i = 0; i < text.length(); i++)
+    {
+        int letter = static_cast<int>(text[i]);
+        if (letter <= 90 && letter >= 65)
+        {
+            letter += 32;
+        }
+        lower.push_back(static_cast<char>(letter));
+    }
+    return lower;
+}
+
+// This is the operator for bonus part 2
+bool operator<(Track a, Track b)
+{ // preconditions:
+    assert(true);
+    // postconditions: we will have compared track a to b and given true if a is the smaller one according to the assignment description, false otherwise
+    if (toLower(a.title) < toLower(b.title))
+    {
+        return true;
+    }
+    else if (toLower(a.title) > toLower(b.title))
+    {
+        return false;
+    }
+    if (toLower(a.artist) < toLower(b.artist))
+    {
+        return true;
+    }
+    else if (toLower(a.artist) > toLower(b.artist))
+    {
+        return false;
+    }
+    if (toLower(a.cd) < toLower(b.cd))
+    {
+        return true;
+    }
+    else if (toLower(a.cd) > toLower(b.cd))
+    {
+        return false;
+    }
+}
+
+bool operator==(Track a, Track b)
+{ // preconditions:
+    assert(true);
+    // postconditions: we will have compared track a to b and given true if a is equal to b according to the assignment description, false otherwise
+    if (toLower(a.title) == toLower(b.title) && toLower(a.artist) == toLower(b.artist) && toLower(a.cd) == toLower(b.cd))
+    {
+        return true;
+    }
+    return false;
 }
 
 Slice mkSlice(int from, int length)
