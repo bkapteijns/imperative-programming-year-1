@@ -1,3 +1,5 @@
+#define NDEBUG
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -14,6 +16,9 @@ typedef int Seconds;
 typedef int Amount;
 typedef string InputText;
 typedef int Size;
+typedef int Counter;
+
+Counter runtime = 0;
 
 struct Length
 {
@@ -376,12 +381,14 @@ istream &operator>>(istream &in, Track &track)
     getline(in, track.country);
     getline(in, temp);
 }
-
-/* These are the operators for the mandatory assignment
+/*
+// These are the operators for the mandatory assignment
 bool operator<(Track a, Track b)
 { // preconditions:
     assert(true);
     // postconditions: we will have compared track a to b and given true if a is the smaller one according to the assignment description, false otherwise
+
+    runtime++;
     if (a.artist < b.artist)
     {
         return true;
@@ -420,6 +427,8 @@ bool operator==(Track a, Track b)
 { // preconditions:
     assert(true);
     // postconditions: we will have compared track a to b and given true if a is equal to b according to the assignment description, false otherwise
+
+    runtime++;
     if (a.artist == b.artist && a.cd == b.cd && a.year == b.year && a.track == b.track)
     {
         return true;
@@ -430,13 +439,15 @@ bool operator==(Track a, Track b)
     }
 }
 */
-
 /*
 // This is the operator for bonus part 1
 bool operator<(Track a, Track b)
 { // preconditions:
     assert(true);
     // postconditions: we will have compared track a to b and given true if a is the smaller one according to the assignment description, false otherwise
+
+    runtime++;
+
     int a_time = a.time.minutes * 60 + a.time.seconds;
     int b_time = b.time.minutes * 60 + b.time.seconds;
     if (a_time < b_time)
@@ -477,6 +488,9 @@ bool operator==(Track a, Track b)
 { // preconditions:
     assert(true);
     // postconditions: we will have compared track a to b and given true if a is equal to b according to the assignment description, false otherwise
+
+    runtime++;
+
     int a_time = a.time.minutes * 60 + a.time.seconds;
     int b_time = b.time.minutes * 60 + b.time.seconds;
     if (a_time == b_time && a.artist == b.artist && a.title == b.title && a.cd == b.cd)
@@ -507,6 +521,8 @@ bool operator<(Track a, Track b)
 { // preconditions:
     assert(true);
     // postconditions: we will have compared track a to b and given true if a is the smaller one according to the assignment description, false otherwise
+
+    runtime++;
     if (toLower(a.title) < toLower(b.title))
     {
         return true;
@@ -537,6 +553,8 @@ bool operator==(Track a, Track b)
 { // preconditions:
     assert(true);
     // postconditions: we will have compared track a to b and given true if a is equal to b according to the assignment description, false otherwise
+
+    runtime++;
     if (toLower(a.title) == toLower(b.title) && toLower(a.artist) == toLower(b.artist) && toLower(a.cd) == toLower(b.cd))
     {
         return true;
@@ -746,7 +764,7 @@ void heap_sort(vector<Track> &data)
     pick_heap(data); // build heap is called during the assertion
 }
 
-void sort(vector<Track> &tracks, string type)
+/* void sort(vector<Track> &tracks, string type)
 {
     if (type == "insertion")
     {
@@ -777,6 +795,86 @@ void sort(vector<Track> &tracks, string type)
     {
         show_track(tracks[i], {true, true, true, true, true, true, true, true});
     }
+} */
+
+void sort(vector<Track> &_tracks)
+{
+    vector<Track> tracks;
+    for (int i = 0; i < size(_tracks); i++)
+    {
+        tracks.push_back(_tracks[i]);
+    }
+    cout << "Sorting by insertion: " << endl;
+    insertion_sort(tracks);
+    cout << "The runtime is: " << runtime << endl
+         << endl;
+    runtime = 0;
+    for (int i = 0; i < size(_tracks); i++)
+    {
+        tracks[i] = _tracks[i];
+    }
+    cout << "Sorting by selection: " << endl;
+    selection_sort(tracks);
+    cout << "The runtime is: " << runtime << endl
+         << endl;
+    runtime = 0;
+    for (int i = 0; i < size(_tracks); i++)
+    {
+        tracks[i] = _tracks[i];
+    }
+    cout << "Sorting by bubble: " << endl;
+    bubble_sort(tracks);
+    cout << "The runtime is: " << runtime << endl
+         << endl;
+    runtime = 0;
+    for (int i = 0; i < size(_tracks); i++)
+    {
+        tracks[i] = _tracks[i];
+    }
+    cout << "Sorting by heap: " << endl;
+    heap_sort(tracks);
+    cout << "The runtime is: " << runtime << endl
+         << endl;
+    runtime = 0;
+}
+
+void output_runtime(int runtime)
+{
+    while (runtime > 100000)
+    {
+        cout << "*";
+        runtime -= 100000;
+    }
+    if (runtime > 0)
+    {
+        cout << ".";
+    }
+    cout << endl;
+}
+
+void test_runtime(vector<Track> &tracks, string algorithm)
+{
+    cout << algorithm << endl;
+    Size len = 100;
+    while (len <= 6700)
+    {
+        runtime = 0;
+        vector<Track> data;
+        for (Size i = 0; i < len; i++)
+        {
+            data.push_back(tracks[i]);
+        }
+        if (algorithm == "Insertion")
+            insertion_sort(data);
+        else if (algorithm == "Selection")
+            selection_sort(data);
+        else if (algorithm == "Bubble")
+            bubble_sort(data);
+        else
+            heap_sort(data);
+        output_runtime(runtime);
+        len += 100;
+    }
 }
 
 int main()
@@ -800,55 +898,391 @@ int main()
             trackList.push_back(new_track);
         }
     }
+    /*
+    //part 2
+    sort(trackList);
+*/
 
-    cout << "Available commands: track (query), artist (query), cds (query), #cds, year (query), sort (algorithm), stop." << endl;
-    cout << "The available algorithms are: 'insertion', 'selection', 'bubble', 'heap'" << endl;
+    // part 3
+    test_runtime(trackList, "Insertion");
+    test_runtime(trackList, "Selection");
+    test_runtime(trackList, "Bubble");
+    test_runtime(trackList, "Heap");
 
-    InputText input;
-    char c;
     while (true)
     {
-        cout << "Give your command:" << endl;
-        cin >> input;
-        if (input == "track")
-        {
-            cin.get(c);
-            getline(cin, input);
-            cout << "Number of tracks: " << match_tracks(trackList, input, true) << endl;
-        }
-        else if (input == "artist")
-        {
-            cin.get(c);
-            getline(cin, input);
-            cout << "Number of artists: " << match_artists(trackList, input, true) << endl;
-        }
-        else if (input == "cds")
-        {
-            cin.get(c);
-            getline(cin, input);
-            cout << "Number of cds from artists: " << match_cds(trackList, input, true) << endl;
-        }
-        else if (input == "#cds")
-        {
-            getline(cin, input);
-            cout << "Total number of cds: " << number_of_cds(trackList) << endl;
-        }
-        else if (input == "year")
-        {
-            cin.get(c);
-            getline(cin, input);
-            cout << "Number of tracks in year: " << match_year(trackList, input, true) << endl;
-        }
-        else if (input == "sort")
-        {
-            cin.get(c);
-            getline(cin, input);
-            sort(trackList, input);
-        }
-        else if (input == "stop")
-        {
-            return 0;
-        }
     }
+
     return 0;
 }
+
+/*
+Solutions for part 1
+
+    a)
+        void read(ifstream &inputfile, int data[N][N][N])
+        {
+            for (int i = 0; i < N; i++)             // a
+                for (int j = 0; j < N; j++)         // b
+                    for (int k = 0; k < N; k++)     // c
+                        inputfile >> data[i][j][k]; // d
+        }
+        O( read(inputfile, data[n][n][n]) ) = O(n^3)
+        Because: at line d, the order is O(1)
+            at line c, the order is O(1) + O(1) + ... + O(1) = O(n) (Because the loop is executed n times)
+            at line b, the order is O(n) + O(n) + ... + O(n) = O(n^2)
+            at line a, the order is O(n^2) + O(n^2) + ... + O(n^2) = O(n^3)
+
+    b)
+        bool occurs(string text, char x)
+        {
+            int i = 0;
+            while (i < text.length() && text[i] != x)   // a
+                i++;                                    // b
+            return i < text.length();
+        }
+        n = text.length
+        O( occurs(text, x) ) = O( n )
+        Because: at line b, the order is O(1)
+            at line a, the order is O(1) + O(1) + ... + O(1) = O(n)
+
+    c)
+        bool occurs (char text [], char x)
+        {
+            int i = 0 ;
+            while (i < strlen (text) && text[i] != x) i++;  // a
+                return i < strlen (text) ;
+        }
+        n = text.length
+        O( occurs(text, x) ) = O( n^2 )
+        Because: the function strlen(text) at line a has order O(n)
+            in the worst case, the while loop will run n times, so the order is O(n) + O(n) + ... + O(n) = O(n^2)
+
+    d)
+        bool is_prime (int x, int& divisor)
+        {
+            if (x <= 1)
+                return false ;
+            for (divisor = 2 ; divisor <= sqrt (static_cast<double>(x)) ; divisor++)    // a
+            {
+                if (x % divisor == 0) return false ;                                    // b
+            }
+            return true ;
+        }
+        O( is_prime(n, divisor) ) = O( n^(1/2) )
+        Because: at line b, the order is O(1)
+            at line a, the order is O(1) + O(1) + ... + O(1) = O(n^(1/2)) (because the loop is executed sqrt(n) times)
+
+    e)
+        void primes (vector<int>& numbers)
+        {
+            for (int i = 0 ; i < size (numbers) ; i++)                      // a
+            { 
+                int d;
+                if (is_prime (numbers[i], d))                               // b
+                    cout << numbers[i] << " is prime" << endl ;
+                else
+                    cout << numbers[i] << " is divisible by " << d << endl ;
+            }
+        }
+        O( primes(numbers) ) = O( n^(3/2) )
+        Because: at line b, the order is O(n^(1/2)) (see exercise d)
+            at line a, the order is O(n^(1/2)) + O(n^(1/2)) + ... + O(n^(1/2)) = O(n*n(1/2)) = O(n^(3/2))
+
+
+Solutions for part 2
+
+    Sorting by insertion:
+    The runtime is: 23334
+
+    Sorting by selection:
+    The runtime is: 22414860
+
+    Sorting by bubble:
+    The runtime is: 479484
+
+    Sorting by heap:
+    The runtime is: 203777
+
+    Insertion sort and bubble sort take a lot less time with these operators, because in the Tracks.txt file, the tracks are by default almost completely sorted 
+    (with the current sorting conditions). So the conditions are near best-case. Selection sort takes a lot more time, because it picks the greatest element out of the slice,
+    so we have to check every element. Heap sort is very efficient, because the order of complexity is only O(n*2log(n)) according to the slides.
+
+Solutions for part 3:
+    Insertion - again, the tracks are by default almost completely sorted, so the conditions are near best-case. That's why it takes little time to perform this algorithm.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+Selection - The order of complexity for this algorithm is o(n^2). If we look at the shape of the time graph, it looks like a parabola, which is the form of a quadratic function.
+.
+.
+.
+.
+*.
+*.
+**.
+***.
+****.
+****.
+******.
+*******.
+********.
+*********.
+***********.
+************.
+**************.
+****************.
+******************.
+*******************.
+**********************.
+************************.
+**************************.
+****************************.
+*******************************.
+*********************************.
+************************************.
+***************************************.
+******************************************.
+********************************************.
+************************************************.
+***************************************************.
+******************************************************.
+*********************************************************.
+*************************************************************.
+****************************************************************.
+********************************************************************.
+************************************************************************.
+****************************************************************************.
+*******************************************************************************.
+************************************************************************************.
+****************************************************************************************.
+********************************************************************************************.
+************************************************************************************************.
+*****************************************************************************************************.
+*********************************************************************************************************.
+**************************************************************************************************************.
+*******************************************************************************************************************.
+************************************************************************************************************************.
+****************************************************************************************************************************.
+**********************************************************************************************************************************.
+***************************************************************************************************************************************.
+********************************************************************************************************************************************.
+*************************************************************************************************************************************************.
+*******************************************************************************************************************************************************.
+************************************************************************************************************************************************************.
+******************************************************************************************************************************************************************.
+************************************************************************************************************************************************************************.
+******************************************************************************************************************************************************************************.
+***********************************************************************************************************************************************************************************.
+******************************************************************************************************************************************************************************************.
+************************************************************************************************************************************************************************************************.
+******************************************************************************************************************************************************************************************************.
+************************************************************************************************************************************************************************************************************.
+*******************************************************************************************************************************************************************************************************************.
+*************************************************************************************************************************************************************************************************************************.
+********************************************************************************************************************************************************************************************************************************.
+Bubble -- again, the tracks are by default almost completely sorted, so the conditions are near best-case, but the last line has a lot of asterisks. This is probably due to the fact that at the end of the tracks.txt file, there is a track that needs to come up front.
+That means that with the last 100 tracks the conditions are not best-case anymore.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+*.
+*.
+*.
+*.
+*.
+*.
+*.
+*.
+*.
+*.
+*.
+*.
+*.
+*.
+**.
+**.
+**.
+**.
+**.
+**.
+**.
+**.
+**.
+**.
+**.
+**.
+**.
+**.
+***.
+***.
+***.
+***.
+***.
+***.
+***.
+***.
+***.
+***.
+***.
+***.
+***.
+****.
+****.
+****.
+****.
+****.
+****.
+****.
+****.
+****.
+****.
+****.
+********************************************************************************************************************************************************************************************************************************.
+Heap - As you can see, super efficient. It increases only slightly. Also we see that at first it takes about 3500 tracks to reach 100000 operations. And 3000 more tracks, 6500
+to reach 200000 operations. After each 100000 operations, you can notice a decrease in efficiency (operations/track) of the algorithm.
+Because as more and more tracks are being sorted, the number of operations needed to sort more tracks will increase logarithmically.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+*.
+*.
+*.
+*.
+*.
+*.
+*.
+*.
+*.
+*.
+*.
+*.
+*.
+*.
+*.
+*.
+*.
+*.
+*.
+*.
+*.
+*.
+*.
+*.
+*.
+*.
+*.
+*.
+*.
+*.
+**.
+**.
+
+*/
