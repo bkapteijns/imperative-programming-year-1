@@ -9,6 +9,7 @@
     "iostream": "cpp",
     "xiosbase": "cpp",
     "algorithm": "cpp",
-    "xutility": "cpp"
+    "xutility": "cpp",
+    "xlocale": "cpp"
   }
 }
