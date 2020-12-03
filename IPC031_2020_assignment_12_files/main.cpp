@@ -59,7 +59,6 @@ void improve(vector<Product> &current, vector<Product> &best)
   // postconditions: best has become current only if sum(current,0) > sum(best, 0)
   if (sum(current, 0) > sum(best, 0))
   {
-    cout << sum(current, 0) << " " << sum(best, 0) << endl;
     best = {};
     for (int i = 0; i < current.size(); i++)
     {
@@ -72,14 +71,6 @@ int gifts(vector<Product> &current, vector<Product> &best, vector<Product> &m, i
 { // preconditions:
   assert(c >= 0 && c <= m.size() && good_wishlist(m));
   // postconditions: result is the best combination of products from the wishlist
-
-  for (int i = 0; i < current.size(); i++)
-  {
-    cout << current[i].name << " worth " << current[i].price << " cents" << endl;
-  }
-  cout << target << endl;
-  cout << sum(current, 0) << " " << sum(best, 0) << endl;
-  cout << endl;
 
   // BASE CASES
   if (target == 0)
@@ -95,8 +86,6 @@ int gifts(vector<Product> &current, vector<Product> &best, vector<Product> &m, i
     return 0;
   }
   if (sum(current, 0) + sum(m, c) <= sum(best, 0))
-    return 0;
-  if (best.size() > 0 && current.size() >= best.size())
     return 0;
 
   // RECURSIVE CASES
