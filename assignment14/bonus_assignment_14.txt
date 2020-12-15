@@ -1,0 +1,61 @@
+CONDITION 1
+
+Sorting by insertion:
+The runtime is: 23334
+
+Sorting by selection:
+The runtime is: 22414860
+
+Sorting by bubble:
+The runtime is: 479484
+
+Sorting by heap:
+The runtime is: 203777
+
+Sorting by quicksort:
+The runtime is: 130935
+
+
+CONDITION 2
+Sorting by insertion:
+The runtime is: 11298169
+
+Sorting by selection:
+The runtime is: 22414860
+
+Sorting by bubble:
+The runtime is: 22407357
+
+Sorting by heap:
+The runtime is: 153890
+
+Sorting by quicksort:
+The runtime is: 167838
+
+
+CONDITION 3
+Sorting by insertion:
+The runtime is: 11180222
+
+Sorting by selection:
+The runtime is: 22414860
+
+Sorting by bubble:
+The runtime is: 22402770
+
+Sorting by heap:
+The runtime is: 154200
+
+Sorting by quicksort:
+The runtime is: 154214
+
+
+For condition 1, the insertion and bubble sort had a near-best case, because the tracks were almost completely sorted according to the criteria.
+As we can see the selection sort took a lot of time, the order was probably n^2. For heap sort and quicksort, the order was about n*log2(n).
+
+For condition 2, insertion, bubble and selection sort all had an order of n^2. Again the heap and quicksort had order n*log2(n).
+
+For conditions 3, insertion, bubble and selection sort again had an order of n^2. The heap and quicksort had order n*log2(n).
+
+As we can see from our results, the heap sort and quicksort are a lot more efficient, regarding time.
+So our measurements support the claims of run-time complexity.
